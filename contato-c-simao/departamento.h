@@ -3,11 +3,12 @@
 #include"organiza.h"
 #include"diciplina.h"
 class Universidade;
+class ListaDiciplina;
 class Derpatamento {
 	private:
 	char nome[30];
-	Diciplina* atualD;
-	Diciplina* cabcaD;
+	ListaDiciplina* atualD;
+	ListaDiciplina* cabcaD;
 	Universidade* uni;
 
 	public:
@@ -21,6 +22,7 @@ class Derpatamento {
 		void inclue_diciplina(Diciplina* di);
 		void print_diciplina();
 		void print_reverse();
+		ListaDiciplina* busca_diciplina(Diciplina* Di);
 		void remove_diciplina(Diciplina* di);
 };
 #endif

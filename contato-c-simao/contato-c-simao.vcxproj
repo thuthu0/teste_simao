@@ -130,6 +130,8 @@
     <ClCompile Include="fufa.cpp" />
     <ClCompile Include="fufb.cpp" />
     <ClCompile Include="lista.cpp" />
+    <ClCompile Include="lista_aluno.cpp" />
+    <ClCompile Include="lista_diciplina.cpp" />
     <ClCompile Include="mundo.cpp" />
     <ClCompile Include="professor.cpp" />
     <ClCompile Include="universidade.cpp" />
@@ -140,6 +142,8 @@
     <ClInclude Include="diciplina.h" />
     <ClInclude Include="fufa.h" />
     <ClInclude Include="lista.h" />
+    <ClInclude Include="lista_aluno.h" />
+    <ClInclude Include="lista_diciplina.h" />
     <ClInclude Include="mundo.h" />
     <ClInclude Include="organiza.h" />
     <ClInclude Include="Professor.h" />

@@ -2,18 +2,19 @@
 #include"organiza.h"
 class Aluno;
 class Derpatamento;
+class ListAluno;
 class Diciplina {
 	private:
 		char nome[50];
 		char area_conhecimento[50];
 		int id;
 		Derpatamento* depD;
-		Aluno* cabecaA;
-		Aluno* atualA;
+		ListAluno* cabecaA;
+		ListAluno* atualA;
 		int numero_aluno;
 		int capacitade_turma;
-		Diciplina* next;
-		Diciplina* prev;
+		//Diciplina* next;
+		//Diciplina* prev;
 
 	public:
 		Diciplina();
@@ -31,10 +32,11 @@ class Diciplina {
 		void inclue_aluno(Aluno* Al);
 		void print_aluno();
 		void printR_aluno();
+		ListAluno* busca_Aluno(Aluno* Al);
 		void remove_aluno(Aluno* Al);
-		void diciplinaS_proximo(Diciplina* prox = NULL);
+		/*void diciplinaS_proximo(Diciplina* prox = NULL);
 		Diciplina* diciplinaG_proximo();
 		void diciplinaS_anterior(Diciplina* ante = NULL);
-		Diciplina* diciplinaG_anterior();
+		Diciplina* diciplinaG_anterior();*/
 
 };

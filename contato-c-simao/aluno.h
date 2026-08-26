@@ -3,8 +3,8 @@
 class Aluno : public Pessoa {
 	private:
 		int RA;
-		Aluno* next;
-		Aluno* prev;
+		//Aluno* next;
+		//Aluno* prev;
 	public:
 		Aluno(int diaP, int mesP, int anoP, const char* nomeP);
 		Aluno();
@@ -12,8 +12,8 @@ class Aluno : public Pessoa {
 		void set_RA(const int & ra);
 		void print_RA();
 		int get_RA();
-		void alunoS_proximo(Aluno* prox = NULL);
+		/*void alunoS_proximo(Aluno* prox = NULL);
 		Aluno* alunoG_proximo();
 		void  alunoS_anterior(Aluno* ante = NULL);
-		Aluno* alunoG_anterior();
+		Aluno* alunoG_anterior();*/
 };
