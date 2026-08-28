@@ -1,6 +1,7 @@
 #include "universidade.h"
 #include"departamento.h"
 #include "lista_diciplina.h"
+#include "diciplina.h"
 Derpatamento::Derpatamento() {
 	set_departamento();
 	atualD = NULL;

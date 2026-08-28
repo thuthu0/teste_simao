@@ -5,8 +5,6 @@ Pessoa::Pessoa(int diaP, int mesP, int anoP,   const char  *nomeP) {
 	inicializar(diaP,mesP,anoP,nomeP);
 }
 Pessoa::Pessoa() {
-	Derpatamento tra_n;
-	tra_n.set_departamento("");
 	inicializar(0,0,0,"");
 }
 Pessoa :: ~Pessoa() {

@@ -1,18 +1,16 @@
 #pragma once
 #include"organiza.h"
+#include "lista_aluno.h"
 class Aluno;
 class Derpatamento;
-class ListAluno;
+class ElemAluno;
 class Diciplina {
 	private:
 		char nome[50];
 		char area_conhecimento[50];
 		int id;
 		Derpatamento* depD;
-		ListAluno* cabecaA;
-		ListAluno* atualA;
-		int numero_aluno;
-		int capacitade_turma;
+		ListAluno turma;
 		//Diciplina* next;
 		//Diciplina* prev;
 
@@ -32,7 +30,7 @@ class Diciplina {
 		void inclue_aluno(Aluno* Al);
 		void print_aluno();
 		void printR_aluno();
-		ListAluno* busca_Aluno(Aluno* Al);
+		ElemAluno* busca_Aluno(Aluno* Al);
 		void remove_aluno(Aluno* Al);
 		/*void diciplinaS_proximo(Diciplina* prox = NULL);
 		Diciplina* diciplinaG_proximo();

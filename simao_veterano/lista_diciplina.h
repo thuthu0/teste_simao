@@ -1,6 +1,7 @@
 #pragma once
 #include "organiza.h"
-#include "diciplina.h"
+
+class Diciplina;
 class ListaDiciplina {
 	private:
 		Diciplina* materia;

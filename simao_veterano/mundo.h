@@ -5,6 +5,9 @@
 #include"pessoa.h"
 #include"Professor.h"
 #include"aluno.h"
+#include "universidade.h"
+#include "departamento.h"
+#include "diciplina.h"
 class Mundo {
 	private:
 		Professor Simao;

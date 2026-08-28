@@ -1,9 +1,9 @@
 #ifndef _DEPARTAMENTO_H_
 #define _DEPARTAMENTO_H_
 #include"organiza.h"
-#include"diciplina.h"
 class Universidade;
 class ListaDiciplina;
+class Diciplina;
 class Derpatamento {
 	private:
 	char nome[30];
