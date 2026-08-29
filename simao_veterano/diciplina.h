@@ -2,14 +2,14 @@
 #include"organiza.h"
 #include "lista_aluno.h"
 class Aluno;
-class Derpatamento;
+class Departamento;
 class ElemAluno;
 class Diciplina {
 	private:
 		char nome[50];
 		char area_conhecimento[50];
 		int id;
-		Derpatamento* depD;
+		Departamento* depD;
 		ListAluno turma;
 		//Diciplina* next;
 		//Diciplina* prev;
@@ -24,9 +24,9 @@ class Diciplina {
 		void set_nome(const char* c);
 		void print_nome();
 		char* get_nome();
-		void set_depDis(Derpatamento* depDi);
+		void set_depDis(Departamento* depDi);
 		void print_depDis();
-		Derpatamento* get_depDis();
+		Departamento* get_depDis();
 		void inclue_aluno(Aluno* Al);
 		void print_aluno();
 		void printR_aluno();

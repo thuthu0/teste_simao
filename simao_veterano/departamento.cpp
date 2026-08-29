@@ -2,42 +2,42 @@
 #include"departamento.h"
 #include "elemento_diciplina.h"
 #include "diciplina.h"
-Derpatamento::Derpatamento() {
+Departamento::Departamento() {
 	set_departamento();
 	uni = NULL;
 }
-Derpatamento::~Derpatamento() {
+Departamento::~Departamento() {
 	uni = NULL;
 }
-void Derpatamento::set_departamento(const char* nomeU) {
+void Departamento::set_departamento(const char* nomeU) {
 	strcpy_s(nome, sizeof(nome), nomeU);
 }
-void Derpatamento::print_dep() {
+void Departamento::print_dep() {
 	cout << "Departamento: " << endl;
 }
-char* Derpatamento::qual_departamento() {
+char* Departamento::qual_departamento() {
 	return nome;
 }
-Universidade* Derpatamento::set_uni(Universidade* uniD) {
+Universidade* Departamento::set_uni(Universidade* uniD) {
 	return uni = uniD;
 }
-void Derpatamento::print_uni() {
+void Departamento::print_uni() {
 	cout << uni->qual_uni() << endl;
 }
-void Derpatamento::inclue_diciplina(Diciplina* di) {
+void Departamento::inclue_diciplina(Diciplina* di) {
 	matriz.inclue_diciplina(di);
 	
 }
-void Derpatamento::print_diciplina() {
+void Departamento::print_diciplina() {
 	matriz.print_diciplina();
 }
-void Derpatamento::print_reverse() {
+void Departamento::print_reverse() {
 	matriz.printR_diciplina();
 }
-ElemDiciplina* Derpatamento::busca_diciplina(Diciplina* Di) {
+ElemDiciplina* Departamento::busca_diciplina(Diciplina* Di) {
 	return matriz.busca_diciplina(Di);
 }
 
-void Derpatamento::remove_diciplina(Diciplina* di) {
+void Departamento::remove_diciplina(Diciplina* di) {
 	matriz.remove_diciplina(di);
 }

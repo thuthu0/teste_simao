@@ -10,18 +10,18 @@ void Mundo::inicializar_universidades() {
 	UTFPR.sua_uni("UTFPR");
 	Cambridge.sua_uni("universidade de Cambridge");
 	Nova_Jessy.sua_uni("universidade de Princeton");
-	UTFPR.incluie_dep(&Dainf);
-	Cambridge.incluie_dep(&matematica_cambridge);
-	Nova_Jessy.incluie_dep(&fisica_princeton);
-	UTFPR.incluie_dep(&matematica_cambridge);
-	UTFPR.incluie_dep(&fisica_princeton);
-	UTFPR.incluie_dep(&Dafis);
-	UTFPR.incluie_dep(&Damat);
-	UTFPR.incluie_dep(&Dadim);
-	UTFPR.incluie_dep(&Daest);
-	UTFPR.incluie_dep(&Daeln);
-	UTFPR.incluie_dep(&Daelt);
-	UTFPR.incluie_dep(&Daqbi);
+	UTFPR.inclue_departamento(&Dainf);
+	Cambridge.inclue_departamento(&matematica_cambridge);
+	Nova_Jessy.inclue_departamento(&fisica_princeton);
+	UTFPR.inclue_departamento(&matematica_cambridge);
+	UTFPR.inclue_departamento(&fisica_princeton);
+	UTFPR.inclue_departamento(&Dafis);
+	UTFPR.inclue_departamento(&Damat);
+	UTFPR.inclue_departamento(&Dadim);
+	UTFPR.inclue_departamento(&Daest);
+	UTFPR.inclue_departamento(&Daeln);
+	UTFPR.inclue_departamento(&Daelt);
+	UTFPR.inclue_departamento(&Daqbi);
 }
 void Mundo::inicializar_departamentos() {
 	Dainf.set_departamento("DAINF");
@@ -122,7 +122,8 @@ void Mundo::informacao_aluno() {
 }
 void Mundo::composicao_universidade() {
 	Dainf.print_uni();
-	UTFPR.print_dep();
+	UTFPR.print_departamento();
+	UTFPR.printR_departamento();
 }
 void Mundo::trabalho_universidade() {
 	Simao.onde_trabalho();

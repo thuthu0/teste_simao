@@ -18,7 +18,7 @@ void Professor::setar_trabalho(Universidade* trab) {
 void Professor::onde_trabalho() {
 	cout << nome << " trabalha na " << trabalho->qual_uni() << endl;
 }
-void Professor::setar_derpa(Derpatamento* depT) {
+void Professor::setar_derpa(Departamento* depT) {
 	localT = depT;
 }
 void Professor::qual_derpa() {

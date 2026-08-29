@@ -38,14 +38,14 @@ void Diciplina::print_nome() {
 char* Diciplina::get_nome() {
 	return nome;
 }
-void Diciplina::set_depDis(Derpatamento* depDi) {
+void Diciplina::set_depDis(Departamento* depDi) {
 	depD = depDi;
 	depDi->inclue_diciplina(this);
 }
 void Diciplina::print_depDis() {
 	cout << "Dicplina " << nome;
 }
-Derpatamento* Diciplina::get_depDis() {
+Departamento* Diciplina::get_depDis() {
 	return depD;
 }
 void Diciplina::inclue_aluno(Aluno* Al) {

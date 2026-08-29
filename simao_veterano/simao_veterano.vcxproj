@@ -126,8 +126,10 @@
     <ClCompile Include="aluno.cpp" />
     <ClCompile Include="departamento.cpp" />
     <ClCompile Include="diciplina.cpp" />
+    <ClCompile Include="elemento_departamento.cpp" />
     <ClCompile Include="fufa.c" />
     <ClCompile Include="lista_aluno.cpp" />
+    <ClCompile Include="lista_departamento.cpp" />
     <ClCompile Include="lista_diciplina.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pessoa.cpp" />
@@ -142,7 +144,9 @@
     <ClInclude Include="aluno.h" />
     <ClInclude Include="departamento.h" />
     <ClInclude Include="diciplina.h" />
+    <ClInclude Include="elemento_departamento.h" />
     <ClInclude Include="lista_aluno.h" />
+    <ClInclude Include="lista_departamento.h" />
     <ClInclude Include="Lista_diciplina.h" />
     <ClInclude Include="pessoa.h" />
     <ClInclude Include="lista.h" />

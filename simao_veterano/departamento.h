@@ -5,15 +5,15 @@
 class Universidade;
 class ElemDiciplina;
 class Diciplina;
-class Derpatamento {
+class Departamento {
 	private:
 	char nome[30];
 	Universidade* uni;
 	ListaDiciplina matriz;
 
 	public:
-		Derpatamento();
-		~Derpatamento();
+		Departamento();
+		~Departamento();
 		void set_departamento(const char* nomeD = "");
 		char *qual_departamento();
 		void print_dep();
