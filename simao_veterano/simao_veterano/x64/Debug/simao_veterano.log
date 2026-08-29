@@ -1,10 +1,4 @@
 ﻿  departamento.cpp
-  diciplina.cpp
-  main.cpp
-  pessoa.cpp
-  elemento_aluno.cpp
-  mundo.cpp
-  professor.cpp
   universidade.cpp
   Gerando Código...
   simao_veterano.vcxproj -> C:\Users\SAMSUNG\source\repos\simao_veterano\x64\Debug\simao_veterano.exe

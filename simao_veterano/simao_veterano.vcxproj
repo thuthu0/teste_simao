@@ -128,11 +128,12 @@
     <ClCompile Include="diciplina.cpp" />
     <ClCompile Include="fufa.c" />
     <ClCompile Include="lista_aluno.cpp" />
+    <ClCompile Include="lista_diciplina.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pessoa.cpp" />
     <ClCompile Include="lista.cpp" />
     <ClCompile Include="elemento_aluno.cpp" />
-    <ClCompile Include="lista_diciplina.cpp" />
+    <ClCompile Include="elemento_diciplina.cpp" />
     <ClCompile Include="mundo.cpp" />
     <ClCompile Include="professor.cpp" />
     <ClCompile Include="universidade.cpp" />
@@ -142,10 +143,11 @@
     <ClInclude Include="departamento.h" />
     <ClInclude Include="diciplina.h" />
     <ClInclude Include="lista_aluno.h" />
+    <ClInclude Include="Lista_diciplina.h" />
     <ClInclude Include="pessoa.h" />
     <ClInclude Include="lista.h" />
     <ClInclude Include="elemento_aluno.h" />
-    <ClInclude Include="lista_diciplina.h" />
+    <ClInclude Include="elemento_diciplina.h" />
     <ClInclude Include="mundo.h" />
     <ClInclude Include="organiza.h" />
     <ClInclude Include="Professor.h" />
