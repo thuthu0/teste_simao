@@ -1,0 +1,40 @@
+#pragma once
+#include"organiza.h"
+#include "lista_aluno.h"
+class Aluno;
+class Departamento;
+class ElemAluno;
+class Diciplina {
+	private:
+		char nome[50];
+		char area_conhecimento[50];
+		int id;
+		Departamento* depD;
+		ListAluno turma;
+		//Diciplina* next;
+		//Diciplina* prev;
+
+	public:
+		Diciplina();
+		~Diciplina();
+		void setup(int cs = 45 , const char* ac = "");
+		void set_id(int n);
+		void print_id();
+		int get_id();
+		void set_nome(const char* c);
+		void print_nome();
+		char* get_nome();
+		void set_depDis(Departamento* depDi);
+		void print_depDis();
+		Departamento* get_depDis();
+		void inclue_aluno(Aluno* Al);
+		void print_aluno();
+		void printR_aluno();
+		ElemAluno* busca_Aluno(Aluno* Al);
+		void remove_aluno(Aluno* Al);
+		/*void diciplinaS_proximo(Diciplina* prox = NULL);
+		Diciplina* diciplinaG_proximo();
+		void diciplinaS_anterior(Diciplina* ante = NULL);
+		Diciplina* diciplinaG_anterior();*/
+
+};
