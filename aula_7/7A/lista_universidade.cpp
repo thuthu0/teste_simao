@@ -27,18 +27,16 @@ ElemUniversidade* ListaUniversidade::get_atualUni() {
 }
 Universidade* ListaUniversidade::buscaN_universidade(const char* nomeUni) {
 	ElemUniversidade* temp = NULL;
-	int achou = 0;
 	if (cabecaUni == NULL) {
 		cout << "Universidade vazia" << endl;
 		return NULL;
 	}
-	for (temp = cabecaUni; temp != NULL || achou != 0; temp = temp->universidadeG_proximo()) {
-		if (temp->get_universidade()->qual_uni() == nomeUni)
-			achou = 1;
+	for (temp = cabecaUni; temp != NULL; temp = temp->universidadeG_proximo()) {
+		if (!strcmp(temp->get_universidade()->qual_uni(),nomeUni))
+			return temp->get_universidade();
 	}
-	if (achou == 1)
-		return temp->get_universidade();
 	cout << "nao achado Universidade" << endl;
+	system("Pause");
 	return NULL;
 }
 void ListaUniversidade::set_nomeUni(const char* nomeUni) {

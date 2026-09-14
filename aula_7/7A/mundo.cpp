@@ -183,7 +183,11 @@ void Mundo::alunoCadastro() {
 	al->set_nome(nomeAluno);
 	al->set_RA(ra);
 	LAluno.inclue_aluno(al);
-
+	if (al != NULL) {
+		cout << "aluno cadastrada com sucesso" << endl;
+	}
+	(void)getchar();
+	(void)getchar();
 }
 void Mundo::alunoExe() {
 	LAluno.print_aluno();
@@ -196,12 +200,12 @@ void Mundo::alunoResgatar() {
 	LAluno.salva_aluno();
 }
 void Mundo::diciplinaCadastro() {
-	int salva = 0;
+	//int salva = 0;
 	char nomeUniver[50], nomeDerpa[50], nomeDici[50];
 	Universidade* iUni = NULL;
 	Departamento* iDep = NULL;
 	Diciplina* iDi = NULL;
-	cout << "insira o nome da universidade" << endl;
+	cout << "insira a busca da universidade" << endl;
 	cin >> nomeUniver;
 	iUni = LUniversidade.buscaN_universidade(nomeUniver);
 	if (iUni != NULL) {
@@ -211,20 +215,27 @@ void Mundo::diciplinaCadastro() {
 		if (iDep != NULL) {
 			cout << "insira o nome do diciplina" << endl;
 			cin >> nomeDici;
-			cout << "deseja salvar, digite 1 para confimar" << endl;
-			cin >> salva;
-			iDi = new Diciplina;
+			iDi = new Diciplina(cout_dic++);
 			LDiciplina.inclue_diciplina(iDi);
 			iDep->inclue_diciplina(iDi);
+			iDi->set_nome(nomeDici);
+			if (iDi != NULL) {
+				cout << "diciplina cadastrada com sucesso" << endl;
+			}
+
+			/*cout << "deseja salvar, digite 1 para confimar" << endl;
+			cin >> salva;
 			if (salva == 1) {
 				FILE* Fdiciplina = NULL;
 				if (fopen_s(&Fdiciplina, "diciplina.bin", "wb") == 0) {
 					fwrite(iDi, sizeof(*iDi), 1, Fdiciplina);
 					fclose(Fdiciplina);
 				}
-			}
+			}*/
 		}
 	}
+	(void)getchar();
+	(void)getchar();
 }
 void Mundo::diciplnaExe() {
 	LDiciplina.print_diciplina();
@@ -237,28 +248,34 @@ void Mundo::diciplinaResgatar() {
 	LDiciplina.salva_diciplina();
 }
 void Mundo::departamentoCadastro() {
-	int salva = 0;
+	//int salva = 0;
 	char nomeUniver[50], nomeDerpa[50];
 	Universidade* iUni = NULL;
 	Departamento* iDep = NULL;
-	cout << "insira o nome da universidade" << endl;
+	cout << "insira a busca da universidade" << endl;
 	cin >> nomeUniver;
 	iUni = LUniversidade.buscaN_universidade(nomeUniver);
 	if (iUni != NULL) {
 		cout << "insira o nome do departamento" << endl;
 		cin >> nomeDerpa;
-		cout << "deseja salvar, digite 1 para confimar" << endl;
-		cin >> salva;
-		iDep = new Departamento;
+		iDep = new Departamento(cout_dep++);
 		LDepartamento.inclue_departamento(iDep);
 		iUni->inclue_departamento(iDep);
+		iDep->set_departamento(nomeDerpa);
+		if (iDep != NULL) {
+			cout << "departamento cadastrada com sucesso" << endl;
+		}
+		/*cout << "deseja salvar, digite 1 para confimar" << endl;
+		cin >> salva;
 		if (salva == 1) {
 			FILE* Fdepartamento = NULL;
 			if (fopen_s(&Fdepartamento, "diciplina.bin", "wb") == 0) {
 				fwrite(iDep, sizeof(*iDep), 1, Fdepartamento);
 				fclose(Fdepartamento);
 			}
-		}
+		}*/
+		(void)getchar();
+		(void)getchar();
 	}
 }
 void Mundo::departamentoExe() {
@@ -272,23 +289,28 @@ void Mundo::departamentoResgatar() {
 	LDepartamento.salva_departamento();
 }
 void Mundo::universidadeCadastro() {
-	int salva = 0;
+	//int salva = 0;
 	char nomeUniver[50];
 	Universidade* iUni = NULL;
 	cout << "insira o nome da universidade" << endl;
 	cin >> nomeUniver;
-	cout << "deseja salvar, digite 1 para confimar" << endl;
-	cin >> salva;
-	iUni = new Universidade;
+	iUni = new Universidade(cout_uni++);
 	iUni->sua_uni(nomeUniver);
 	LUniversidade.inclue_universidade(iUni);
+	if (iUni != NULL) {
+		cout << "universidade cadastrada com sucesso" << endl;
+	}
+	/*cout << "deseja salvar, digite 1 para confimar" << endl;
+	cin >> salva;
 	if (salva == 1) {
 		FILE* Funiversidade = NULL;
 		if (fopen_s(&Funiversidade, "diciplina.bin", "wb") == 0) {
 			fwrite(iUni, sizeof(*iUni), 1, Funiversidade);
 			fclose(Funiversidade);
 		}
-	}
+	}*/
+	(void)getchar();
+	(void)getchar();
 }
 void Mundo::universidadeExe() {
 	LUniversidade.print_universidade();
@@ -372,12 +394,24 @@ void Mundo::menuRegistrar(){
 		cin >> opcao;
 		switch (opcao) {
 			case 1: { diciplinaRegistrar(); }
+				  cout << "diciplina registrada com sucesso" << endl;
+				  (void)getchar();
+				  (void)getchar();
 				  break;
 			case 2: { departamentoRegistrar(); }
+				  cout << "departamento registrada com sucesso" << endl;
+				  (void)getchar();
+				  (void)getchar();
 				  break;
 			case 3: { universidadeRegistrar(); }
+				  cout << "universidade registrada com sucesso" << endl;
+				  (void)getchar();
+				  (void)getchar();
 				  break;
 			case 4: { alunoRegistrar(); }
+				  cout << "aluno registrada com sucesso" << endl;
+				  (void)getchar();
+				  (void)getchar();
 				  break;
 			case 5: { cout << "voltando para o menu pricipal..." << endl; }
 				  break;
@@ -401,12 +435,24 @@ void Mundo::menuResgatar() {
 		cin >> opcao;
 		switch (opcao) {
 		case 1: { diciplinaResgatar(); }
+			  cout << "diciplina salva com sucesso" << endl;
+			  (void)getchar();
+			  (void)getchar();
 			  break;
 		case 2: { departamentoResgatar(); }
+			  cout << "departamento salva com sucesso" << endl;
+			  (void)getchar();
+			  (void)getchar();
 			  break;
 		case 3: { universidadeResgatar(); }
+			  cout << "universidade salva com sucesso" << endl;
+			  (void)getchar();
+			  (void)getchar();
 			  break;
 		case 4: { alunoResgatar(); }
+			  cout << "diciplina salva com sucesso" << endl;
+			  (void)getchar();
+			  (void)getchar();
 			  break;
 		case 5: { cout << "voltando para o menu pricipal..." << endl; }
 			  break;

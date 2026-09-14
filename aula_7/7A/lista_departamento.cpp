@@ -33,12 +33,10 @@ Departamento* ListaDepartamento::buscaN_departamento(const char* nomeDep) {
 		cout << "Departamento vazia" << endl;
 		return NULL;
 	}
-	for (temp = cabecaDep; temp != NULL || achou != 0; temp = temp->departamentoG_proximo()) {
-		if (temp->get_departamento()->qual_departamento() == nomeDep)
-			achou = 1;
+	for (temp = cabecaDep; temp != NULL; temp = temp->departamentoG_proximo()) {
+		if (!strcmp(temp->get_departamento()->qual_departamento(), nomeDep))
+			return temp->get_departamento();
 	}
-	if (achou == 1)
-		return temp->get_departamento();
 	cout << "nao achado" << endl;
 	return NULL;
 }
