@@ -1,11 +1,9 @@
 #include"aluno.h"
-Aluno::Aluno(int diaP, int mesP, int anoP, const char* nomeP) :Pessoa(diaP, mesP, anoP, nomeP) {
-	RA = -1;
+Aluno::Aluno(int diaP, int mesP, int anoP, const char* nomeP, int idO) :Pessoa(diaP, mesP, anoP, nomeP,  idO ),RA(0) {
 	//next = NULL;
 	//prev = NULL;
 }
-Aluno::Aluno() :Pessoa() {
-	RA = -1;
+Aluno::Aluno(int idO) :Pessoa(idO),RA(0) {
 	//next = NULL;
 	//prev = NULL;
 }

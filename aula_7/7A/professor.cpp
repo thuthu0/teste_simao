@@ -1,10 +1,10 @@
 #include"Professor.h"
-Professor::Professor(int diaP, int mesP, int anoP, const char* nomeP):Pessoa( diaP,  mesP,  anoP,  nomeP)
+Professor::Professor(int diaP, int mesP, int anoP, const char* nomeP, int idO ):Pessoa( diaP,  mesP,  anoP,  nomeP, idO )
 {
 	trabalho = NULL;
 	localT = NULL;
 }
-Professor::Professor(): Pessoa() {
+Professor::Professor(int idO): Pessoa(idO) {
 	trabalho = NULL;
 	localT = NULL;
 }
@@ -18,7 +18,7 @@ void Professor::setar_trabalho(Universidade* trab) {
 void Professor::onde_trabalho() {
 	cout << nome << " trabalha na " << trabalho->qual_uni() << endl;
 }
-void Professor::setar_derpa(Derpatamento* depT) {
+void Professor::setar_derpa(Departamento* depT) {
 	localT = depT;
 }
 void Professor::qual_derpa() {

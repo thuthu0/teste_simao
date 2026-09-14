@@ -1,11 +1,12 @@
 #include "elemento_aluno.h"
-#include "lista_aluno.h"
-ElemAluno::ElemAluno() {
+#include "aluno.h"
+ElemAluno::ElemAluno(int idO ) {
 	nota = -1;
 	parcial_1 = -1;
 	parcial_2 = -1;
 	presença = 0;
 	diaLetivo = 300;
+	set_id(idO);
 	estudante = NULL;
 	next = NULL;
 	prev = NULL;
@@ -20,6 +21,9 @@ ElemAluno :: ~ElemAluno() {
 	estudante = NULL;
 	next = NULL;
 	prev = NULL;
+}
+void ElemAluno::set_id(int n) {
+	id = n;
 }
 void ElemAluno:: colo_aluno(Aluno* Al) {
 	if (this == NULL)

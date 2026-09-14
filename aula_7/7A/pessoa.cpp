@@ -1,23 +1,35 @@
 #include"pessoa.h"
 
 
-Pessoa::Pessoa(int diaP, int mesP, int anoP,   const char  *nomeP) {
-	inicializar(diaP,mesP,anoP,nomeP);
+Pessoa::Pessoa(int diaP, int mesP, int anoP,   const char  *nomeP, int idO ) {
+	inicializar(diaP,mesP,anoP,nomeP,idO);
 }
-Pessoa::Pessoa() {
-	Derpatamento tra_n;
-	tra_n.set_departamento("");
-	inicializar(0,0,0,"");
+Pessoa::Pessoa(int idO) {
+	inicializar(0,0,0,"", idO);
 }
 Pessoa :: ~Pessoa() {
 
 }
-void Pessoa:: inicializar(int diaP, int mesP, int anoP, const char* nomeP) {
+void Pessoa::set_id(int n) {
+	id = n;
+}
+int Pessoa::get_id() {
+	return id;
+}
+char* Pessoa::get_nome() {
+	return nome;
+}
+void Pessoa::set_nome(const char *nomeP) {
+	strcpy_s(nome, sizeof(nome), nomeP);
+}
+void Pessoa:: inicializar(int diaP, int mesP, int anoP, const char* nomeP, int idO) {
 	dia = diaP;
 	mes = mesP;
 	ano = anoP;
 	idade = -1;
-	strcpy_s(nome, sizeof(nome), nomeP);
+	id = idO;
+	set_nome(nomeP);
+	set_id(idO);
 }
 void Pessoa::calcu_idade(int diaC, int mesC, int anoC) {
 	if ((mesC > mes) || ((mesC == mes) && (diaC >= dia)))

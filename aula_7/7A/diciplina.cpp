@@ -2,26 +2,20 @@
 #include "departamento.h"
 #include "aluno.h"
 #include "elemento_aluno.h"
-#include "lista_aluno.h"
-Diciplina::Diciplina() {
+Diciplina::Diciplina(int idO ):turma() {
 	setup();
+	set_id(idO);
 }
 Diciplina::~Diciplina() {
-	ElemAluno*temp = NULL, *depois = NULL;
-	for (temp = turma.get_cabeca(); temp != NULL; temp = depois) {
-		depois = temp->alunoG_proximo();
-		delete temp;
-	}
 
 	depD = NULL;
 	//next = NULL;
 	//prev = NULL;
 }
-void Diciplina::setup(int ct, const char* ac) {
+void Diciplina::setup(int ct, const char* ac, int idO ) {
 	depD = NULL;
 	//next = NULL;
 	//prev = NULL;
-	id = -1;
 	strcpy_s(nome, sizeof(nome), "");
 	strcpy_s(area_conhecimento, sizeof(area_conhecimento), ac);
 
@@ -44,18 +38,17 @@ void Diciplina::print_nome() {
 char* Diciplina::get_nome() {
 	return nome;
 }
-void Diciplina::set_depDis(Derpatamento* depDi) {
+void Diciplina::set_depDis(Departamento* depDi) {
 	depD = depDi;
 	depDi->inclue_diciplina(this);
 }
 void Diciplina::print_depDis() {
 	cout << "Dicplina " << nome;
 }
-Derpatamento* Diciplina::get_depDis() {
+Departamento* Diciplina::get_depDis() {
 	return depD;
 }
 void Diciplina::inclue_aluno(Aluno* Al) {
-	cout << "aaa" << endl;
 	turma.inclue_aluno(Al);
 }
 void Diciplina::print_aluno() {

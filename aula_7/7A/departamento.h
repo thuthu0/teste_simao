@@ -1,20 +1,22 @@
 #ifndef _DEPARTAMENTO_H_
 #define _DEPARTAMENTO_H_
 #include"organiza.h"
-#include"diciplina.h"
-class Diciplina;
+#include "Lista_diciplina.h"
 class Universidade;
-class ListaDiciplina;
-class Derpatamento {
+class ElemDiciplina;
+class Diciplina;
+class Departamento {
 	private:
-	char nome[30];
-	ListaDiciplina* atualD;
-	ListaDiciplina* cabcaD;
-	Universidade* uni;
+		char nome[30];
+		Universidade* uni;
+		ListaDiciplina matriz;
+		int id;
 
 	public:
-		Derpatamento();
-		~Derpatamento();
+		Departamento(int idO = 0);
+		~Departamento();
+		void set_id(int n = 0);
+		int get_id();
 		void set_departamento(const char* nomeD = "");
 		char *qual_departamento();
 		void print_dep();
@@ -23,7 +25,7 @@ class Derpatamento {
 		void inclue_diciplina(Diciplina* di);
 		void print_diciplina();
 		void print_reverse();
-		ListaDiciplina* busca_diciplina(Diciplina* Di);
+		ElemDiciplina* busca_diciplina(Diciplina* Di);
 		void remove_diciplina(Diciplina* di);
 };
 #endif

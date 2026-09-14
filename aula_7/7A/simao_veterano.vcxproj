@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7f0cdb8e-1500-4159-b927-ce9513e0cfdd}</ProjectGuid>
-    <RootNamespace>contatocsimao</RootNamespace>
+    <ProjectGuid>{272f60eb-9c5d-4f46-9d2b-8d304356ad16}</ProjectGuid>
+    <RootNamespace>simaoveterano</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -126,12 +126,18 @@
     <ClCompile Include="aluno.cpp" />
     <ClCompile Include="departamento.cpp" />
     <ClCompile Include="diciplina.cpp" />
+    <ClCompile Include="elemento_departamento.cpp" />
+    <ClCompile Include="elemento_universidade.cpp" />
     <ClCompile Include="fufa.c" />
-    <ClCompile Include="fufa.cpp" />
-    <ClCompile Include="fufb.cpp" />
-    <ClCompile Include="lista.cpp" />
     <ClCompile Include="lista_aluno.cpp" />
+    <ClCompile Include="lista_departamento.cpp" />
     <ClCompile Include="lista_diciplina.cpp" />
+    <ClCompile Include="lista_universidade.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="pessoa.cpp" />
+    <ClCompile Include="lista.cpp" />
+    <ClCompile Include="elemento_aluno.cpp" />
+    <ClCompile Include="elemento_diciplina.cpp" />
     <ClCompile Include="mundo.cpp" />
     <ClCompile Include="professor.cpp" />
     <ClCompile Include="universidade.cpp" />
@@ -140,10 +146,16 @@
     <ClInclude Include="aluno.h" />
     <ClInclude Include="departamento.h" />
     <ClInclude Include="diciplina.h" />
-    <ClInclude Include="fufa.h" />
-    <ClInclude Include="lista.h" />
+    <ClInclude Include="elemento_departamento.h" />
+    <ClInclude Include="elemento_universidade.h" />
     <ClInclude Include="lista_aluno.h" />
-    <ClInclude Include="lista_diciplina.h" />
+    <ClInclude Include="lista_departamento.h" />
+    <ClInclude Include="Lista_diciplina.h" />
+    <ClInclude Include="lista_universidade.h" />
+    <ClInclude Include="pessoa.h" />
+    <ClInclude Include="lista.h" />
+    <ClInclude Include="elemento_aluno.h" />
+    <ClInclude Include="elemento_diciplina.h" />
     <ClInclude Include="mundo.h" />
     <ClInclude Include="organiza.h" />
     <ClInclude Include="Professor.h" />

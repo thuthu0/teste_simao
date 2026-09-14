@@ -2,35 +2,31 @@
 #include"organiza.h"
 #include "lista_aluno.h"
 class Aluno;
-class Derpatamento;
+class Departamento;
 class ElemAluno;
 class Diciplina {
 	private:
 		char nome[50];
 		char area_conhecimento[50];
 		int id;
-		Derpatamento* depD;
+		Departamento* depD;
 		ListAluno turma;
-		/*ElemAluno* cabecaA;
-		ElemAluno* atualA;
-		int numero_aluno;
-		int capacitade_turma;*/
 		//Diciplina* next;
 		//Diciplina* prev;
 
 	public:
-		Diciplina();
+		Diciplina(int idO = 0);
 		~Diciplina();
-		void setup(int cs = 45 , const char* ac = "");
-		void set_id(int n);
+		void setup(int cs = 45 , const char* ac = "", int idO = 0);
+		void set_id(int n = 0);
 		void print_id();
 		int get_id();
 		void set_nome(const char* c);
 		void print_nome();
 		char* get_nome();
-		void set_depDis(Derpatamento* depDi);
+		void set_depDis(Departamento* depDi);
 		void print_depDis();
-		Derpatamento* get_depDis();
+		Departamento* get_depDis();
 		void inclue_aluno(Aluno* Al);
 		void print_aluno();
 		void printR_aluno();

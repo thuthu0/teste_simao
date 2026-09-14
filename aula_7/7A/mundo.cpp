@@ -1,5 +1,6 @@
 #include"mundo.h"
 void Mundo::inicializar() {
+	id = 0;
 	inicializar_universidades();
 	inicializar_departamentos();
 	inicializar_diciplinas();
@@ -10,18 +11,18 @@ void Mundo::inicializar_universidades() {
 	UTFPR.sua_uni("UTFPR");
 	Cambridge.sua_uni("universidade de Cambridge");
 	Nova_Jessy.sua_uni("universidade de Princeton");
-	UTFPR.incluie_dep(&Dainf);
-	Cambridge.incluie_dep(&matematica_cambridge);
-	Nova_Jessy.incluie_dep(&fisica_princeton);
-	UTFPR.incluie_dep(&matematica_cambridge);
-	UTFPR.incluie_dep(&fisica_princeton);
-	UTFPR.incluie_dep(&Dafis);
-	UTFPR.incluie_dep(&Damat);
-	UTFPR.incluie_dep(&Dadim);
-	UTFPR.incluie_dep(&Daest);
-	UTFPR.incluie_dep(&Daeln);
-	UTFPR.incluie_dep(&Daelt);
-	UTFPR.incluie_dep(&Daqbi);
+	UTFPR.inclue_departamento(&Dainf);
+	Cambridge.inclue_departamento(&matematica_cambridge);
+	Nova_Jessy.inclue_departamento(&fisica_princeton);
+	UTFPR.inclue_departamento(&matematica_cambridge);
+	UTFPR.inclue_departamento(&fisica_princeton);
+	UTFPR.inclue_departamento(&Dafis);
+	UTFPR.inclue_departamento(&Damat);
+	UTFPR.inclue_departamento(&Dadim);
+	UTFPR.inclue_departamento(&Daest);
+	UTFPR.inclue_departamento(&Daeln);
+	UTFPR.inclue_departamento(&Daelt);
+	UTFPR.inclue_departamento(&Daqbi);
 }
 void Mundo::inicializar_departamentos() {
 	Dainf.set_departamento("DAINF");
@@ -85,22 +86,28 @@ void Mundo::inicializar_alunos() {
 	Joas.set_RA(278905);
 }
 Mundo::Mundo() :
-	Simao(),
-	Einstein(),
-	Newton()
+	cout_uni(0),cout_dep(0),cout_prof(0),cout_dic(0),cout_aluno(0),
+	UTFPR(cout_uni++),Cambridge(cout_uni++),Nova_Jessy(cout_uni++),
+	Dainf(cout_dep++),Dafis(cout_dep++),Damat(cout_dep++),Dadim(cout_dep++),Daeln(cout_dep++),Daelt(cout_dep++),
+	Daest(cout_dep++),Daqbi(cout_dep++),
+	tec_prog(cout_dic++),EDO(cout_dic++),calculo_2(cout_dic++),ED_2(cout_dic++),matematica_discreta(cout_dic++),
+	logica(cout_dic++),
+	Simao(cout_prof++),Einstein(cout_prof++),Newton(cout_prof++),
+	Melissa(cout_aluno++),Abner(cout_aluno++),Joas(cout_aluno++)
 {
+	
 	inicializar();
 }
  Mundo::~Mundo() {
-
+	 
  }
 void Mundo :: informe_dia() {
-	int dia = -1, mes = -1, ano = -1;
+	 diaM = -1, mesM = -1, anoM = -1;
 	cout << "informe o dia de hoje" << endl;
-	cin >> dia >> mes >> ano;
-	Simao.calcu_idade(dia, mes, ano);
-	Einstein.calcu_idade(dia, mes, ano);
-	Newton.calcu_idade(dia, mes, ano);
+	cin >> diaM >> mesM >> anoM;
+	Simao.calcu_idade(diaM, mesM, anoM);
+	Einstein.calcu_idade(diaM, mesM, anoM);
+	Newton.calcu_idade(diaM, mesM, anoM);
 	Simao.print_idade();
 	Einstein.print_idade();
 	Newton.print_idade();
@@ -110,19 +117,22 @@ void Mundo::informe_trabalho() {
 	trabalho_departamento();
 }
 void Mundo:: execudar() {
-	informe_dia();
+	srand((unsigned int)time(NULL));
+	/*informe_dia();
 	composicao_universidade();
 	informe_trabalho();
 	informacao_aluno();
 	diciplinas_departamento();
-	diciplina_aluno();
+	diciplina_aluno();*/
+	menu();
 }
 void Mundo::informacao_aluno() {
 	Melissa.print_RA();
 }
 void Mundo::composicao_universidade() {
 	Dainf.print_uni();
-	UTFPR.print_dep();
+	UTFPR.print_departamento();
+	UTFPR.printR_departamento();
 }
 void Mundo::trabalho_universidade() {
 	Simao.onde_trabalho();
@@ -145,4 +155,295 @@ void Mundo::diciplina_aluno() {
 	tec_prog.inclue_aluno(&Joas);
 	tec_prog.printR_aluno();
 	tec_prog.print_aluno();
+}
+void Mundo::executa_tudo() {
+	ElemDiciplina* temDi = NULL;
+	ElemDepartamento* temDep = NULL;
+	ElemUniversidade* temUni = NULL;
+	cout << "tudo que está cadastrado no sistema é" << endl;
+	for (temUni = LUniversidade.get_cabecaUni(); temUni != NULL; temUni = temUni->universidadeG_proximo()) {
+		cout << temUni->get_universidade()->qual_uni() << ":" << endl;
+		for (temDep = LDepartamento.get_cabecaDep(); temDep != NULL; temDep = temDep->departamentoG_proximo()) {
+			cout << "  " << temDep->get_departamento()->qual_departamento() << ":" << endl;
+			for (temDi = LDiciplina.get_cabecaD(); temDi != NULL; temDi = temDi->diciplinaG_proximo())
+				cout << "    " << temDi->posicao_diciplina()->get_nome() << endl;
+			}
+	}
+	system("Pause");
+}
+void Mundo::alunoCadastro() {
+	char nomeAluno[50];
+	int ra = -1;
+	Aluno* al = NULL;
+	cout << "Qual nome do aluno" << endl;
+	cin >> nomeAluno;
+	cout << "Qualo RA do aluno" << endl;
+		cin >> ra;
+	al = new Aluno(cout_aluno++);
+	al->set_nome(nomeAluno);
+	al->set_RA(ra);
+	LAluno.inclue_aluno(al);
+
+}
+void Mundo::alunoExe() {
+	LAluno.print_aluno();
+	system("Pause");
+}
+void Mundo::alunoRegistrar() {
+	LAluno.registra_aluno();
+}
+void Mundo::alunoResgatar() {
+	LAluno.salva_aluno();
+}
+void Mundo::diciplinaCadastro() {
+	int salva = 0;
+	char nomeUniver[50], nomeDerpa[50], nomeDici[50];
+	Universidade* iUni = NULL;
+	Departamento* iDep = NULL;
+	Diciplina* iDi = NULL;
+	cout << "insira o nome da universidade" << endl;
+	cin >> nomeUniver;
+	iUni = LUniversidade.buscaN_universidade(nomeUniver);
+	if (iUni != NULL) {
+		cout << "insira o nome do departamento" << endl;
+		cin >> nomeDerpa;
+		iDep = LDepartamento.buscaN_departamento(nomeDerpa);
+		if (iDep != NULL) {
+			cout << "insira o nome do diciplina" << endl;
+			cin >> nomeDici;
+			cout << "deseja salvar, digite 1 para confimar" << endl;
+			cin >> salva;
+			iDi = new Diciplina;
+			LDiciplina.inclue_diciplina(iDi);
+			iDep->inclue_diciplina(iDi);
+			if (salva == 1) {
+				FILE* Fdiciplina = NULL;
+				if (fopen_s(&Fdiciplina, "diciplina.bin", "wb") == 0) {
+					fwrite(iDi, sizeof(*iDi), 1, Fdiciplina);
+					fclose(Fdiciplina);
+				}
+			}
+		}
+	}
+}
+void Mundo::diciplnaExe() {
+	LDiciplina.print_diciplina();
+	system("Pause");
+}
+void Mundo::diciplinaRegistrar() {
+	LDiciplina.registra_diciplina();
+}
+void Mundo::diciplinaResgatar() {
+	LDiciplina.salva_diciplina();
+}
+void Mundo::departamentoCadastro() {
+	int salva = 0;
+	char nomeUniver[50], nomeDerpa[50];
+	Universidade* iUni = NULL;
+	Departamento* iDep = NULL;
+	cout << "insira o nome da universidade" << endl;
+	cin >> nomeUniver;
+	iUni = LUniversidade.buscaN_universidade(nomeUniver);
+	if (iUni != NULL) {
+		cout << "insira o nome do departamento" << endl;
+		cin >> nomeDerpa;
+		cout << "deseja salvar, digite 1 para confimar" << endl;
+		cin >> salva;
+		iDep = new Departamento;
+		LDepartamento.inclue_departamento(iDep);
+		iUni->inclue_departamento(iDep);
+		if (salva == 1) {
+			FILE* Fdepartamento = NULL;
+			if (fopen_s(&Fdepartamento, "diciplina.bin", "wb") == 0) {
+				fwrite(iDep, sizeof(*iDep), 1, Fdepartamento);
+				fclose(Fdepartamento);
+			}
+		}
+	}
+}
+void Mundo::departamentoExe() {
+	LDepartamento.print_departamento();
+	system("Pause");
+}
+void Mundo::departamentoRegistrar() {
+	LDepartamento.registra_departamento();
+}
+void Mundo::departamentoResgatar() {
+	LDepartamento.salva_departamento();
+}
+void Mundo::universidadeCadastro() {
+	int salva = 0;
+	char nomeUniver[50];
+	Universidade* iUni = NULL;
+	cout << "insira o nome da universidade" << endl;
+	cin >> nomeUniver;
+	cout << "deseja salvar, digite 1 para confimar" << endl;
+	cin >> salva;
+	iUni = new Universidade;
+	iUni->sua_uni(nomeUniver);
+	LUniversidade.inclue_universidade(iUni);
+	if (salva == 1) {
+		FILE* Funiversidade = NULL;
+		if (fopen_s(&Funiversidade, "diciplina.bin", "wb") == 0) {
+			fwrite(iUni, sizeof(*iUni), 1, Funiversidade);
+			fclose(Funiversidade);
+		}
+	}
+}
+void Mundo::universidadeExe() {
+	LUniversidade.print_universidade();
+	system("Pause");
+}
+void Mundo::universidadeRegistrar() {
+	LUniversidade.registra_universidade();
+}
+void Mundo::universidadeResgatar() {
+	LUniversidade.salva_universidade();
+}
+void Mundo::menuCadastro() {
+	int opcao = -1;
+	while (opcao != 5) {
+		system("cls");
+		cout << "o que deseja cadastrar?" << endl;
+		cout << "digite 1 para cadastrar uma diciplina" << endl;
+		cout << "digite 2 para cadastrar um departamento" << endl;
+		cout << "digite 3 para cadastrar uma universidade" << endl;
+		cout << "digite 4 para cadastrar um aluno" << endl;
+		cout << "digite 5 para voltar" << endl;
+		cin >> opcao;
+		switch (opcao) {
+		case 1: { diciplinaCadastro(); }
+			break;
+		case 2: { departamentoCadastro(); }
+			break;
+		case 3: { universidadeCadastro(); }
+			break;
+		case 4: { alunoCadastro(); }
+			  break;
+		case 5: { cout << "voltando para o menu pricipal..." << endl; }
+			break;
+		default: { cout << "erro no menu de cadastro"<< endl; 
+					system("Pause");
+		}
+		}
+	}
+}
+void Mundo::menuExe() {
+	int opcao = -1;
+	while (opcao != 6) {
+		system("cls");
+		cout << "digite 1 para printar as diciplinas de um departamento" << endl;
+		cout << "digite 2 para printar os departamentos de uma universidade" << endl;
+		cout << "digite 3 para printar as universidades cadastradas" << endl;
+		cout << "digite 4 para printar os alunos cadastradas" << endl;
+		cout << "digite 5 para printar tudo que estar cadastrado" << endl;
+		cout << "digite 6 para voltar para o menu principal" << endl;
+		cin >> opcao;
+		switch (opcao) {
+			case 1: { diciplnaExe(); }
+				break;
+			case 2: { departamentoExe(); }
+				break;
+			case 3: { universidadeExe(); }
+				break;
+			case 4: { alunoExe(); }
+				  break;
+			case 5: { executa_tudo(); }
+				break;
+			case 6: { cout << "voltando pro menu pricipal..."; }
+				break;
+			default: {
+				cout << "erro no menu executavel" << endl;
+				system("Pause");
+			}
+		}
+	}
+}
+void Mundo::menuRegistrar(){
+	int opcao = -1;
+	while (opcao != 5) {
+		system("cls");
+		cout << "o que deseja cadastrar?" << endl;
+		cout << "digite 1 para registrar uma diciplina" << endl;
+		cout << "digite 2 para registrar um departamento" << endl;
+		cout << "digite 3 para registrar uma universidade" << endl;
+		cout << "digite 4 para registrar um aluno" << endl;
+		cout << "digite 5 para voltar" << endl;
+		cin >> opcao;
+		switch (opcao) {
+			case 1: { diciplinaRegistrar(); }
+				  break;
+			case 2: { departamentoRegistrar(); }
+				  break;
+			case 3: { universidadeRegistrar(); }
+				  break;
+			case 4: { alunoRegistrar(); }
+				  break;
+			case 5: { cout << "voltando para o menu pricipal..." << endl; }
+				  break;
+			default: {
+				cout << "erro no menu de Registro" << endl;
+				system("Pause");
+			}
+		}
+	}
+}
+void Mundo::menuResgatar() {
+	int opcao = -1;
+	while (opcao != 5) {
+		system("cls");
+		cout << "o que deseja cadastrar?" << endl;
+		cout << "digite 1 para resgatar uma diciplina" << endl;
+		cout << "digite 2 para resgatar um departamento" << endl;
+		cout << "digite 3 para resgatar uma universidade" << endl;
+		cout << "digite 4 para resgatar um aluno" << endl;
+		cout << "digite 5 para voltar" << endl;
+		cin >> opcao;
+		switch (opcao) {
+		case 1: { diciplinaResgatar(); }
+			  break;
+		case 2: { departamentoResgatar(); }
+			  break;
+		case 3: { universidadeResgatar(); }
+			  break;
+		case 4: { alunoResgatar(); }
+			  break;
+		case 5: { cout << "voltando para o menu pricipal..." << endl; }
+			  break;
+		default: {
+			cout << "erro no menu de Resgate" << endl;
+			system("Pause");
+		}
+		}
+	}
+}
+void Mundo::menu() {
+	int opcao = -1;
+	while (opcao != 5) {
+		system("cls");
+		cout << "deseja cadastrar ou mostra algo" << endl;
+		cout << "digite 1 para cadastrar alguma das opcoes posteriorers no sisterma academico" << endl;
+		cout << "degite 2 para printar na dela alguma das opcoes posteriorers no sisterma academico" << endl;
+		cout << "digite 3 para registrar alguma das opcoes posteriorers no sisterma academico" << endl;
+		cout << "digite 4 para resgatar alguma das opcoes posteriorers no sisterma academico" << endl;
+		cout << "digite 5 para sair do sistema" << endl;
+		cin >> opcao;
+		switch (opcao) {
+		case 1: { menuCadastro(); }
+			break;
+		case 2: {  menuExe();}
+			break;
+		case 3: { menuRegistrar(); }
+			  break;
+		case 4: { menuResgatar(); }
+			  break;
+		case 5: { cout << "sistema fechado" << endl; }
+			break;
+
+		default:{
+				cout << "erro no menu" << endl;
+				system("Pause");
+			}
+		}
+	}
 }

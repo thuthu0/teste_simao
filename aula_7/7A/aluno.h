@@ -6,8 +6,8 @@ class Aluno : public Pessoa {
 		//Aluno* next;
 		//Aluno* prev;
 	public:
-		Aluno(int diaP, int mesP, int anoP, const char* nomeP);
-		Aluno();
+		Aluno(int diaP, int mesP, int anoP, const char* nomeP, int idO);
+		Aluno(int idO);
 		~Aluno();
 		void set_RA(const int & ra);
 		void print_RA();

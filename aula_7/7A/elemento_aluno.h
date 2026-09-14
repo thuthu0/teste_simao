@@ -1,8 +1,5 @@
 #pragma once
 #include "organiza.h"
-#include "aluno.h"
-//#include "diciplina.h"
-class ListAluno;
 class Aluno;
 class ElemAluno {
 	private:
@@ -14,9 +11,11 @@ class ElemAluno {
 		int nota;
 		int presença;
 		int diaLetivo;
+		int id;
 	public:
-		ElemAluno();
+		ElemAluno(int idO = 0);
 		~ElemAluno();
+		void set_id(int n = 0);
 		void colo_aluno(Aluno* Al);
 		Aluno* posicao_aluno();
 		void alunoS_proximo(ElemAluno* prox = NULL);
