@@ -8,8 +8,6 @@ ListaDiciplina::ListaDiciplina() {
 }
 ListaDiciplina::~ListaDiciplina() {
 	destroy_lista();
-	cabecaD = NULL;
-	atualD = NULL;
 }
 
 ElemDiciplina* ListaDiciplina::get_cabecaD() {
@@ -114,6 +112,8 @@ void ListaDiciplina::destroy_lista() {
 		depois = temp->diciplinaG_proximo();
 		delete temp;
 	}
+	cabecaD = NULL;
+	atualD = NULL;
 }
 void ListaDiciplina::salva_diciplina() {
 	ofstream SalvaDiciplina("diciplinas.dat", ios::out);

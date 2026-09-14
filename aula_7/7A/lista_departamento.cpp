@@ -8,8 +8,6 @@ ListaDepartamento::ListaDepartamento( ) {
 }
 ListaDepartamento::~ListaDepartamento() {
 	destroy_lista();
-	cabecaDep = NULL;
-	atualDep = NULL;
 }
 
 ElemDepartamento* ListaDepartamento::get_cabecaDep() {
@@ -126,6 +124,8 @@ void ListaDepartamento::destroy_lista() {
 		depois = temp->departamentoG_proximo();
 		delete temp;
 	}
+	cabecaDep = NULL;
+	atualDep = NULL;
 }
 void ListaDepartamento::salva_departamento() {
 	ofstream SalvaDepartamento("departamentos.dat", ios::out);

@@ -143,6 +143,8 @@ void ListAluno::destroy_lista() {
 		depois = temp->alunoG_proximo();
 		delete temp;
 	}
+	cabecaA = NULL;
+	atualA = NULL;
 }
 void ListAluno::salva_aluno() {
 	ofstream SalvaAlunos("alunos.dat", ios::out);

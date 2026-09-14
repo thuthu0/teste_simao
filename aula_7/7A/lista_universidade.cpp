@@ -8,8 +8,6 @@ ListaUniversidade::ListaUniversidade() {
 }
 ListaUniversidade::~ListaUniversidade() {
 	destroy_lista();
-	cabecaUni = NULL;
-	atualUni = NULL;
 }
 ElemUniversidade* ListaUniversidade::get_cabecaUni() {
 	if (this == NULL) {
@@ -125,6 +123,8 @@ void ListaUniversidade::destroy_lista() {
 		depois = temp->universidadeG_proximo();
 		delete temp;
 	}
+	cabecaUni = NULL;
+	atualUni = NULL;
 }
 void ListaUniversidade::salva_universidade() {
 	ofstream SalvaUniversidade("universidades.dat", ios::out);
