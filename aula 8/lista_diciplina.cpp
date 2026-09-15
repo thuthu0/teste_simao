@@ -1,0 +1,153 @@
+#include "Lista_diciplina.h"
+#include "elemento_diciplina.h"
+#include "diciplina.h"
+ListaDiciplina::ListaDiciplina() {
+	set_Lderpa_nome();
+	cabecaD = NULL;
+	atualD = NULL;
+}
+ListaDiciplina::~ListaDiciplina() {
+	destroy_lista();
+}
+
+ElemDiciplina* ListaDiciplina::get_cabecaD() {
+	if (this == NULL) {
+		cout << "cabecaD nula" << endl;
+		return NULL;
+	}
+	return this->cabecaD;
+}
+ElemDiciplina* ListaDiciplina::get_atualD() {
+	if (this == NULL) {
+		cout << "atualD nula" << endl;
+		return NULL;
+	}
+	return this->atualD;
+}
+void ListaDiciplina::set_Lderpa_nome(const char* nomeLD) {
+	strcpy_s(nome,sizeof(nome),nomeLD);
+}
+void ListaDiciplina::inclue_diciplina(Diciplina* di) {
+	ElemDiciplina* diciplina = new ElemDiciplina;
+	diciplina->colo_diciplina(di);
+	if (di == NULL) {
+		printf("erro diciplina com valor nulo");
+		return;
+	}
+	if (cabecaD == NULL) {
+		cabecaD = diciplina;
+		atualD = diciplina;
+	}
+	else {
+		ElemDiciplina* temp = atualD;
+		atualD->diciplinaS_proximo(diciplina);//di;
+		atualD = atualD->diciplinaG_proximo();
+		atualD->diciplinaS_anterior(temp);// = temp;
+	}
+}
+void ListaDiciplina::print_diciplina() {
+	ElemDiciplina* temp;
+	cout << "as diciplinas que fazem parte do departamento " << nome << " sao " << endl;
+	for (temp = cabecaD; temp != NULL; temp = temp->diciplinaG_proximo()) {
+		temp->posicao_diciplina()->print_depDis();
+		cout << " do " << nome << endl;
+	}
+}
+void ListaDiciplina::printR_diciplina() {
+	ElemDiciplina* temp;
+	cout << "as diciplinas em ordem reversa do derpatamento sao " << endl;
+	for (temp = atualD; temp != NULL; temp = temp->diciplinaG_anterior()) {
+		temp->posicao_diciplina()->print_depDis();
+		cout << " do " << nome << endl;
+	}
+}
+ElemDiciplina* ListaDiciplina::busca_diciplina(Diciplina* di){
+	ElemDiciplina* temp = NULL;
+	if (cabecaD == NULL) {
+		cout << "Turma vazia" << endl;
+		return NULL;
+	}
+	for (temp = cabecaD; temp != NULL; temp = temp->diciplinaG_proximo()) {
+		if (temp->posicao_diciplina() == di)
+			return temp;
+	}
+	cout << "nao achado" << endl;
+	return NULL;
+}
+void ListaDiciplina::remove_diciplina(Diciplina* di) {
+	ElemDiciplina* temp = cabecaD, * diciplina;
+	diciplina = busca_diciplina(di);
+	if (di == NULL) {
+		printf("remoção de nulo detectado");
+		return;
+	}
+	if (diciplina == cabecaD) {
+		cabecaD = cabecaD->diciplinaG_proximo();
+		cabecaD->diciplinaS_anterior(NULL);// = NULL;
+		delete temp;
+	}
+	else if (diciplina == atualD) {
+		temp = atualD;
+		atualD = atualD->diciplinaG_anterior();
+		atualD->diciplinaS_proximo(NULL);// = NULL;
+		delete temp;
+	}
+	else {
+		while (temp->diciplinaG_proximo() != diciplina)
+			temp = temp->diciplinaG_proximo();
+		temp->diciplinaS_proximo(temp->diciplinaG_proximo()->diciplinaG_proximo());// = temp->next->next;
+		temp = temp->diciplinaG_proximo();
+		temp->diciplinaS_anterior(temp->diciplinaG_anterior()->diciplinaG_anterior());// = temp->prev->prev;
+		diciplina->diciplinaS_proximo(NULL);// = NULL;
+		diciplina->diciplinaS_anterior(NULL);// = NULL;
+		delete diciplina;
+	}
+}
+void ListaDiciplina::destroy_lista() {
+	ElemDiciplina* temp = NULL, * depois = NULL;
+	for (temp = cabecaD; temp != NULL; temp = depois) {
+		depois = temp->diciplinaG_proximo();
+		delete temp;
+	}
+	cabecaD = NULL;
+	atualD = NULL;
+}
+void ListaDiciplina::salva_diciplina() {
+	ofstream SalvaDiciplina("diciplinas.dat", ios::out);
+	if (!SalvaDiciplina) {
+		cerr << "nao consegui abrir arquivo diciplina" << endl;
+		fflush(stdin);
+		return;
+	}
+	ElemDiciplina* galuno = NULL;
+	galuno = cabecaD;
+	Diciplina* temp = NULL;
+	while (galuno != NULL) {
+		temp = galuno->posicao_diciplina();
+		SalvaDiciplina  << temp->get_id() << temp->get_nome() << endl;
+		galuno = galuno->diciplinaG_proximo();
+
+	}
+	SalvaDiciplina.close();
+}
+void ListaDiciplina::registra_diciplina() {
+	ifstream ResgistraDiciplina("diciplinas.dat", ios::in);
+	if (!ResgistraDiciplina) {
+		cerr << "nao consegui regartar arquivo diciplina" << endl;
+		fflush(stdin);
+	}
+	destroy_lista();
+	while (!ResgistraDiciplina.eof()) {
+		Diciplina* temp = NULL;
+		int id;
+		char nome[30];
+		ResgistraDiciplina >> id  >> nome;
+		if (0 != strcpy_s(nome, sizeof(nome), "")) {
+			temp = new Diciplina(-1);
+			temp->set_id(id);
+			temp->set_nome(nome);
+			inclue_diciplina(temp);
+		}
+	}
+	ResgistraDiciplina.close();
+}
