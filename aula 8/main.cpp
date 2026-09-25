@@ -8,15 +8,18 @@ int main() {
 	cout << s.get_string() << endl;
 	const char* caixa_alta;
 	caixa_alta = s.get_string();
-	StringA v;
+	StringA v,t;
 	v = "pasardaga e o lugar dos sonhos do passado";
 	cout << v.get_string() << endl;
-	if (v == s)
+	if (v != s)
 		cout << "nao e para acontece" << endl;
-		v = s;
 	if (v == s)
 		cout << "e para acontece" << endl;
 	cout << v << endl;
+	s += v;
+	//t = s +  " "+ v;
+	cin >> t;
+	cout << t << endl;
 	return 0;
 }/*Pessoa Einstein(14, 3, 1879,"Albert Einstein"), Newton(4, 1, 1643,"Isacc Newton");
 	Einstein.calcu_idade(24, 8, 2009);

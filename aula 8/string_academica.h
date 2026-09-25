@@ -6,12 +6,20 @@ class StringA {
 		int tam;
 	private:
 		void set_string(const char* s = "");
+		 const bool verifica(StringA& m);
 	public:
 		StringA(const char *s = "");
+		StringA(const StringA& s);
 		~StringA();
-		const char* get_string();
-		void operator=(const char* s);
-		void operator=(StringA& v);
-		bool operator==(StringA& m);
+		  char* get_string()const;
+		   StringA& operator=(const char* s);
+		   StringA& operator=(const StringA& s);
+		   StringA operator+(const char* s);
+		   StringA operator+(const StringA& s);
+		   StringA operator+=(const char* s);
+		   StringA operator+=(const StringA& s);
+		 bool operator==(StringA& s);
+		 bool operator!=(StringA& s);
 };
 ostream&operator<<(ostream& out, StringA & s);
+istream&operator>>(istream& in, StringA& s);

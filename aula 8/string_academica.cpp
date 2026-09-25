@@ -2,6 +2,10 @@
 StringA::StringA(const char *s): tam(strlen(s)) {
 	set_string(s);
 }
+StringA::StringA(const StringA& s): tam(s.tam) {
+	palavra = new char[tam + 1];
+	strcpy_s(palavra, tam + 1, s.palavra);
+}
 StringA::~StringA() {
 	delete[]palavra;
 	palavra = NULL;
@@ -10,27 +14,59 @@ void StringA::set_string(const char* s) {
 	palavra = new char[tam + 1];
 	strcpy_s(palavra, tam + 1, s);
 }
-const char* StringA::get_string() {
+ char* StringA::get_string()const {
 	return palavra;
 }
-void StringA::operator=(const char* s) {
+ const bool StringA::verifica(StringA& s) {
+	if (!strcmp(palavra, s.get_string()))
+		return true;
+
+	return false;
+}
+  StringA& StringA::operator=(const char* s) {
 	if (s != palavra) {
 		delete[]palavra;
 		tam = strlen(s);
 		set_string(s);
 	}
+	return *this;
 }
-void StringA::operator=(StringA& v) {
-	operator=(v.get_string());
+  StringA& StringA::operator=(const StringA& s) {
+	return operator=(s.get_string());
 }
-bool StringA::operator==(StringA& m) {
-	if (!strcmp(palavra, m.get_string()))
-		return true;
+  StringA StringA::operator+(const char* s) {
+	  int tamN = tam + (int)strlen(s);
+	 char* v = new char[tamN +1];
+	 strcpy_s(v,  tamN + 1 , s);
+	strcat_s(v, tamN + 1, palavra);
+	StringA soma(v);
+	delete[]v;
+	return soma;
+}
+  StringA StringA::operator+(const StringA& s) {
+	return operator+(s.get_string());
+}
+  StringA StringA::operator+=(const char* s) {
+	  return operator=(operator+(s));
+  }
+  StringA StringA::operator+=(const StringA& s) {
+	  return operator+=(s.get_string());
+  }
+ bool StringA::operator==(StringA& s) {
+	return verifica(s);
 
-	return false;
-
+}
+ bool StringA::operator!=(StringA& s) {
+	return !verifica(s);
 }
 ostream& operator<<(ostream& out, StringA & s) {
 	out << s.get_string();
 	return out;
+}
+istream& operator>>(istream& in, StringA& s) {
+	char buffa[TAM_MAX];
+	in.width(sizeof(buffa));
+	in >> buffa;
+	s = buffa;
+	return in;
 }
