@@ -1,37 +1,36 @@
 #include "lista_universidade.h"
-#include "elemento_universidade.h"
+//#include "elemento_universidade.h"
 #include "universidade.h"
 ListaUniversidade::ListaUniversidade() {
 	set_nomeUni();
-	cabecaUni = NULL;
-	atualUni = NULL;
+	listauniversidade.aterrar();
 }
 ListaUniversidade::~ListaUniversidade() {
-	destroy_lista();
+	listauniversidade.destroy();
 }
-ElemUniversidade* ListaUniversidade::get_cabecaUni() {
+Elemento<Universidade>* ListaUniversidade::get_cabecaUni() {
 	if (this == NULL) {
 		cout << "cabecaUni nula" << endl;
 		return NULL;
 	}
-	return this->cabecaUni;
+	return this->listauniversidade.get_cabeca();
 }
-ElemUniversidade* ListaUniversidade::get_atualUni() {
+Elemento<Universidade>* ListaUniversidade::get_atualUni() {
 	if (this == NULL) {
 		cout << "atualUni nula" << endl;
 		return NULL;
 	}
-	return this->atualUni;
+	return this->listauniversidade.get_atual();
 }
 Universidade* ListaUniversidade::buscaN_universidade(const char* nomeUni) {
-	ElemUniversidade* temp = NULL;
-	if (cabecaUni == NULL) {
+	Elemento<Universidade>* temp = NULL;
+	if (listauniversidade.get_cabeca() == NULL) {
 		cout << "Universidade vazia" << endl;
 		return NULL;
 	}
-	for (temp = cabecaUni; temp != NULL; temp = temp->universidadeG_proximo()) {
-		if (!strcmp(temp->get_universidade()->qual_uni(),nomeUni))
-			return temp->get_universidade();
+	for (temp = listauniversidade.get_cabeca(); temp != NULL; temp = temp->get_proximo()) {
+		if (!strcmp(temp->get_elem()->qual_uni(),nomeUni))
+			return temp->get_elem();
 	}
 	cout << "nao achado Universidade" << endl;
 	system("Pause");
@@ -41,45 +40,45 @@ void ListaUniversidade::set_nomeUni(const char* nomeUni) {
 	strcpy_s(nome,sizeof(nome),nomeUni);
 }
 void ListaUniversidade::inclue_universidade(Universidade* uni) {
-	ElemUniversidade* universidade = new ElemUniversidade;
-	universidade->set_universidade(uni);
+	Elemento<Universidade>* universidade = new Elemento<Universidade>;
+	universidade->set_elem(uni);
 	if (uni == NULL) {
 		printf("erro universidade com valor nulo");
 		return;
 	}
-	if (cabecaUni == NULL) {
-		cabecaUni = universidade;
-		atualUni = universidade;
+	if (listauniversidade.get_cabeca() == NULL) {
+		listauniversidade.set_cabeca(universidade);//cabecaUni = universidade;
+		listauniversidade.set_atual(universidade);//atualUni = universidade;
 	}
 	else {
-		ElemUniversidade* temp = atualUni;
-		atualUni->universidadeS_proximo(universidade);//di;
-		atualUni = atualUni->universidadeG_proximo();
-		atualUni->universidadeS_anterior(temp);// = temp;
+		Elemento<Universidade>* temp = listauniversidade.get_atual();
+		listauniversidade.get_atual()->set_proximo(universidade);//atualUni->set_proximo(universidade);
+		listauniversidade.set_atual(listauniversidade.get_atual()->get_proximo());//atualUni = atualUni->get_proximo();
+		listauniversidade.get_atual()->set_anterior(temp);//atualUni->set_anterior(temp);
 	}
 }
 void ListaUniversidade::print_universidade() {
-	ElemUniversidade* temp = NULL;
+	Elemento<Universidade>* temp = NULL;
 	cout << "as universidades são" << endl;
-	for (temp = cabecaUni; temp != NULL; temp = temp->universidadeG_proximo()) {
-		cout << temp->get_universidade()->qual_uni() << endl;
+	for (temp = listauniversidade.get_cabeca(); temp != NULL; temp = temp->get_proximo()) {
+		cout << temp->get_elem()->qual_uni() << endl;
 	}
 }
 void ListaUniversidade::printR_universidade() {
-	ElemUniversidade* temp = NULL;
+	Elemento<Universidade>* temp = NULL;
 	cout << "as universidades em ordem inversa são" << endl;
-	for (temp = atualUni; temp != NULL; temp = temp->universidadeG_anterior()) {
-		cout << temp->get_universidade()->qual_uni() << endl;
+	for (temp = listauniversidade.get_atual(); temp != NULL; temp = temp->get_anterior()) {
+		cout << temp->get_elem()->qual_uni() << endl;
 	}
 }
-ElemUniversidade* ListaUniversidade::busca_universidade(Universidade* uni) {
-	ElemUniversidade* temp = NULL;
-	if (cabecaUni == NULL) {
+Elemento<Universidade>* ListaUniversidade::busca_universidade(Universidade* uni) {
+	Elemento<Universidade>* temp = NULL;
+	if (listauniversidade.get_cabeca() == NULL) {
 		cout << "Universidade vazia" << endl;
 		return NULL;
 	}
-	for (temp = cabecaUni; temp != NULL ; temp = temp->universidadeG_proximo()) {
-		if (temp->get_universidade() == uni)
+	for (temp = listauniversidade.get_cabeca(); temp != NULL ; temp = temp->get_proximo()) {
+		if (temp->get_elem() == uni)
 			return temp;
 	}
 		return temp;
@@ -87,43 +86,35 @@ ElemUniversidade* ListaUniversidade::busca_universidade(Universidade* uni) {
 	return NULL;
 }
 void ListaUniversidade::remove_universidade(Universidade* uni) {
-	ElemUniversidade* temp = cabecaUni, * universidade = NULL;
+	Elemento<Universidade>* temp = listauniversidade.get_cabeca(), * universidade = NULL;
 	universidade = busca_universidade(uni);
 	if (uni == NULL) {
 		printf("remoção de nulo detectado");
 		return;
 	}
-	if (universidade == cabecaUni) {
-		cabecaUni = cabecaUni->universidadeG_proximo();
-		cabecaUni->universidadeS_anterior(NULL);// = NULL;
+	if (universidade == listauniversidade.get_cabeca()) {
+		listauniversidade.set_cabeca(listauniversidade.get_cabeca()->get_proximo());//cabecaUni = cabecaUni->get_proximo();
+		listauniversidade.get_cabeca()->set_anterior(NULL);//cabecaUni->set_anterior(NULL);
 		delete temp;
 	}
-	else if (universidade == atualUni) {
-		temp = atualUni;
-		atualUni = atualUni->universidadeG_anterior();
-		atualUni->universidadeS_proximo(NULL);// = NULL;
+	else if (universidade == listauniversidade.get_atual()) {
+		temp = listauniversidade.get_atual();
+		listauniversidade.set_atual(listauniversidade.get_atual()->get_anterior());//atualUni = atualUni->get_anterior();
+		listauniversidade.get_atual()->set_anterior(NULL);//atualUni->set_proximo(NULL);
 		delete temp;
 	}
 	else {
-		while (temp->universidadeG_proximo() != universidade)
-			temp = temp->universidadeG_proximo();
-		temp->universidadeS_proximo(temp->universidadeG_proximo()->universidadeG_proximo());// = temp->next->next;
-		temp = temp->universidadeG_proximo();
-		temp->universidadeS_anterior(temp->universidadeG_anterior()->universidadeG_anterior());// = temp->prev->prev;
-		universidade->universidadeS_proximo(NULL);// = NULL;
-		universidade->universidadeS_anterior(NULL);// = NULL;
+		while (temp->get_proximo() != universidade)
+			temp = temp->get_proximo();
+		temp->set_proximo(temp->get_proximo()->get_proximo());// = temp->next->next;
+		temp = temp->get_proximo();
+		temp->set_anterior(temp->get_anterior()->get_anterior());// = temp->prev->prev;
+		universidade->set_proximo(NULL);// = NULL;
+		universidade->set_anterior(NULL);// = NULL;
 		delete universidade;
 	}
 }
-void ListaUniversidade::destroy_lista() {
-	ElemUniversidade* temp = NULL, * depois = NULL;
-	for (temp = cabecaUni; temp != NULL; temp = depois) {
-		depois = temp->universidadeG_proximo();
-		delete temp;
-	}
-	cabecaUni = NULL;
-	atualUni = NULL;
-}
+
 void ListaUniversidade::salva_universidade() {
 	ofstream SalvaUniversidade("universidades.dat", ios::out);
 	if (!SalvaUniversidade) {
@@ -131,13 +122,13 @@ void ListaUniversidade::salva_universidade() {
 		fflush(stdin);
 		return;
 	}
-	ElemUniversidade* galuno = NULL;
-	galuno = cabecaUni;
+	Elemento<Universidade>* galuno = NULL;
+	galuno = listauniversidade.get_cabeca();
 	Universidade* temp = NULL;
 	while (galuno != NULL) {
-		temp = galuno->get_universidade();
+		temp = galuno->get_elem();
 		SalvaUniversidade << temp->get_id() << temp->qual_uni() << endl;
-		galuno = galuno->universidadeG_proximo();
+		galuno = galuno->get_proximo();
 
 	}
 	SalvaUniversidade.close();
@@ -148,7 +139,7 @@ void ListaUniversidade::registra_universidade() {
 		cerr << "nao consegui regartar arquivo diciplina" << endl;
 		fflush(stdin);
 	}
-	destroy_lista();
+	listauniversidade.destroy();
 	while (!ResgistraUniversidade.eof()) {
 		Universidade* temp = NULL;
 		int id;

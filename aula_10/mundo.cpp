@@ -158,13 +158,13 @@ void Mundo::diciplina_aluno() {
 }
 void Mundo::executa_tudo() {
 	Elemento<Diciplina>* temDi = NULL;
-	ElemDepartamento* temDep = NULL;
-	ElemUniversidade* temUni = NULL;
+	Elemento<Departamento>* temDep = NULL;
+	Elemento<Universidade>* temUni = NULL;
 	cout << "tudo que está cadastrado no sistema é" << endl;
-	for (temUni = LUniversidade.get_cabecaUni(); temUni != NULL; temUni = temUni->universidadeG_proximo()) {
-		cout << temUni->get_universidade()->qual_uni() << ":" << endl;
-		for (temDep = LDepartamento.get_cabecaDep(); temDep != NULL; temDep = temDep->departamentoG_proximo()) {
-			cout << "  " << temDep->get_departamento()->qual_departamento() << ":" << endl;
+	for (temUni = LUniversidade.get_cabecaUni(); temUni != NULL; temUni = temUni->get_proximo()) {
+		cout << temUni->get_elem()->qual_uni() << ":" << endl;
+		for (temDep = LDepartamento.get_cabecaDep(); temDep != NULL; temDep = temDep->get_proximo()) {
+			cout << "  " << temDep->get_elem()->qual_departamento() << ":" << endl;
 			for (temDi = LDiciplina.get_cabecaD(); temDi != NULL; temDi = temDi->get_proximo())
 				cout << "    " << temDi->get_elem()->get_nome() << endl;
 			}

@@ -2,14 +2,13 @@
 #include "organiza.h"
 #include "aluno.h"
 //#include "elemento_aluno.h"
-#include "elemento.h"
+#include "lista.h"
 class ListAluno {
 	private:
 	char nome[50];
-	Elemento<Aluno>* cabecaA;
-	Elemento<Aluno>* atualA;
-		int numero_aluno;
-		int capacitade_turma;
+	Lista<Aluno> listaluno;
+	int numero_aluno;
+	int capacitade_turma;
 
 	public:
 		ListAluno();
@@ -20,7 +19,6 @@ class ListAluno {
 		void printR_aluno();
 		Elemento<Aluno>* busca_Aluno(Aluno* Al);
 		void remove_aluno(Aluno* Al);
-		void destroy_lista();
 		void salva_aluno();
 		void registra_aluno();
 };

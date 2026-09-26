@@ -1,39 +1,37 @@
 #include"lista_departamento.h"
-#include "elemento_departamento.h"
 #include "departamento.h"
 ListaDepartamento::ListaDepartamento( ) {
 	set_nomeD("");
-	cabecaDep = NULL;
-	atualDep = NULL;
+	listadepartamento.aterrar();
 }
 ListaDepartamento::~ListaDepartamento() {
-	destroy_lista();
+	listadepartamento.destroy();
 }
 
-ElemDepartamento* ListaDepartamento::get_cabecaDep() {
+Elemento<Departamento>* ListaDepartamento::get_cabecaDep() {
 	if (this == NULL) {
 		cout << "cabecaDep nula" << endl;
 		return NULL;
 	}
-	return this->cabecaDep;
+	return this->listadepartamento.get_cabeca();
 }
-ElemDepartamento* ListaDepartamento::get_atualDep() {
+Elemento<Departamento>* ListaDepartamento::get_atualDep() {
 	if (this == NULL) {
 		cout << "atualDep nula" << endl;
 		return NULL;
 	}
-	return this->atualDep;
+	return this->listadepartamento.get_atual();
 }
 Departamento* ListaDepartamento::buscaN_departamento(const char* nomeDep) {
-	ElemDepartamento* temp = NULL;
+	Elemento<Departamento>* temp = NULL;
 	int achou = 0;
-	if (cabecaDep == NULL) {
+	if (listadepartamento.get_cabeca() == NULL) {
 		cout << "Departamento vazia" << endl;
 		return NULL;
 	}
-	for (temp = cabecaDep; temp != NULL; temp = temp->departamentoG_proximo()) {
-		if (!strcmp(temp->get_departamento()->qual_departamento(), nomeDep))
-			return temp->get_departamento();
+	for (temp = listadepartamento.get_cabeca(); temp != NULL; temp = temp->get_proximo()) {
+		if (!strcmp(temp->get_elem()->qual_departamento(), nomeDep))
+			return temp->get_elem();
 	}
 	cout << "nao achado" << endl;
 	return NULL;
@@ -42,45 +40,45 @@ void ListaDepartamento::set_nomeD(const char* nomeD) {
 	strcpy_s(nome,sizeof(nome),nomeD);
 }
 void ListaDepartamento:: inclue_departamento(Departamento* dep) {
-	ElemDepartamento* departamento = new ElemDepartamento;
-	departamento->set_departamento(dep);
+	Elemento<Departamento>* departamento = new Elemento<Departamento>;
+	departamento->set_elem(dep);
 	if (dep == NULL) {
 		printf("erro departamento com valor nulo");
 		return;
 	}
-	if (cabecaDep == NULL) {
-		cabecaDep = departamento;
-		atualDep = departamento;
+	if (listadepartamento.get_cabeca() == NULL) {
+		listadepartamento.set_cabeca(departamento);//cabecaDep = departamento;
+		listadepartamento.set_atual(departamento);//atualDep = departamento;
 	}
 	else {
-		ElemDepartamento* temp = atualDep;
-		atualDep->departamentoS_proximo(departamento);//di;
-		atualDep = atualDep->departamentoG_proximo();
-		atualDep->departamentoS_anterior(temp);// = temp;
+		Elemento<Departamento>* temp = listadepartamento.get_atual();
+		listadepartamento.get_atual()->set_proximo(departamento);//atualDep->set_proximo(departamento);
+		listadepartamento.set_atual(listadepartamento.get_atual()->get_proximo());//atualDep = atualDep->get_proximo();
+		listadepartamento.get_atual()->set_anterior(temp);//atualDep->set_anterior(temp);
 	}
 }
 void ListaDepartamento::print_departamento() {
-	ElemDepartamento* temp = NULL;
+	Elemento<Departamento>* temp = NULL;
 	cout << "os departamentos da universidade são" << endl;
-	for (temp = cabecaDep; temp != NULL; temp = temp->departamentoG_proximo()) {
-		cout << temp->get_departamento()->qual_departamento() << endl;
+	for (temp = listadepartamento.get_cabeca(); temp != NULL; temp = temp->get_proximo()) {
+		cout << temp->get_elem()->qual_departamento() << endl;
 	}
 }
 void ListaDepartamento::printR_departamento() {
-	ElemDepartamento* temp = NULL;
+	Elemento<Departamento>* temp = NULL;
 	cout << "os departamentos da universidade em ordem inversa são" << endl;
-	for (temp = atualDep; temp != NULL; temp = temp->departamentoG_anterior()) {
-		cout << temp->get_departamento()->qual_departamento()  << endl;
+	for (temp = listadepartamento.get_atual(); temp != NULL; temp = temp->get_anterior()) {
+		cout << temp->get_elem()->qual_departamento()  << endl;
 	}
 }
-ElemDepartamento* ListaDepartamento::busca_departamento(Departamento* dep) {
-	ElemDepartamento* temp = NULL;
-	if (cabecaDep == NULL) {
+Elemento<Departamento>* ListaDepartamento::busca_departamento(Departamento* dep) {
+	Elemento<Departamento>* temp = NULL;
+	if (listadepartamento.get_cabeca() == NULL) {
 		cout << "Departamento vazia" << endl;
 		return NULL;
 	}
-	for (temp = cabecaDep; temp != NULL; temp = temp->departamentoG_proximo()) {
-		if (temp->get_departamento() == dep)
+	for (temp = listadepartamento.get_cabeca(); temp != NULL; temp = temp->get_proximo()) {
+		if (temp->get_elem() == dep)
 			return temp;
 	}
 		
@@ -88,43 +86,35 @@ ElemDepartamento* ListaDepartamento::busca_departamento(Departamento* dep) {
 	return NULL;
 }
 void ListaDepartamento::remove_departamento(Departamento* dep) {
-	ElemDepartamento* temp = cabecaDep, * departamento;
+	Elemento<Departamento>* temp = listadepartamento.get_cabeca(), * departamento;
 	departamento = busca_departamento(dep);
 	if (dep == NULL) {
 		printf("remoção de nulo detectado");
 		return;
 	}
-	if (departamento == cabecaDep) {
-		cabecaDep = cabecaDep->departamentoG_proximo();
-		cabecaDep->departamentoS_anterior(NULL);// = NULL;
+	if (departamento == listadepartamento.get_cabeca()) {
+		listadepartamento.set_cabeca(listadepartamento.get_cabeca()->get_proximo());//cabecaDep = cabecaDep->get_proximo();
+		listadepartamento.get_cabeca()->set_anterior(NULL);//cabecaDep->set_anterior(NULL);
 		delete temp;
 	}
-	else if (departamento == atualDep) {
-		temp = atualDep;
-		atualDep = atualDep->departamentoG_anterior();
-		atualDep->departamentoS_proximo(NULL);// = NULL;
+	else if (departamento == listadepartamento.get_atual()) {
+		temp = listadepartamento.get_atual();
+		listadepartamento.set_atual(listadepartamento.get_atual()->get_anterior());//atualDep = atualDep->get_anterior();
+		listadepartamento.get_atual()->set_proximo(NULL);//atualDep->set_proximo(NULL);
 		delete temp;
 	}
 	else {
-		while (temp->departamentoG_proximo() != departamento)
-			temp = temp->departamentoG_proximo();
-		temp->departamentoS_proximo(temp->departamentoG_proximo()->departamentoG_proximo());// = temp->next->next;
-		temp = temp->departamentoG_proximo();
-		temp->departamentoS_anterior(temp->departamentoG_anterior()->departamentoG_anterior());// = temp->prev->prev;
-		departamento->departamentoS_proximo(NULL);// = NULL;
-		departamento->departamentoS_anterior(NULL);// = NULL;
+		while (temp->get_proximo() != departamento)
+			temp = temp->get_proximo();
+		temp->set_proximo(temp->get_proximo()->get_proximo());// = temp->next->next;
+		temp = temp->get_proximo();
+		temp->set_anterior(temp->get_anterior()->get_anterior());// = temp->prev->prev;
+		departamento->set_proximo(NULL);// = NULL;
+		departamento->set_anterior(NULL);// = NULL;
 		delete departamento;
 	}
 }
-void ListaDepartamento::destroy_lista() {
-	ElemDepartamento* temp = NULL, * depois = NULL;
-	for (temp = cabecaDep; temp != NULL; temp = depois) {
-		depois = temp->departamentoG_proximo();
-		delete temp;
-	}
-	cabecaDep = NULL;
-	atualDep = NULL;
-}
+
 void ListaDepartamento::salva_departamento() {
 	ofstream SalvaDepartamento("departamentos.dat", ios::out);
 	if (!SalvaDepartamento) {
@@ -132,13 +122,13 @@ void ListaDepartamento::salva_departamento() {
 		fflush(stdin);
 		return;
 	}
-	ElemDepartamento* galuno = NULL;
-	galuno = cabecaDep;
+	Elemento<Departamento>* galuno = NULL;
+	galuno = listadepartamento.get_cabeca();
 	Departamento* temp = NULL;
 	while (galuno != NULL) {
-		temp = galuno->get_departamento();
+		temp = galuno->get_elem();
 		SalvaDepartamento << temp->get_id() << temp->qual_departamento() << endl;
-		galuno = galuno->departamentoG_proximo();
+		galuno = galuno->get_proximo();
 
 	}
 	SalvaDepartamento.close();
@@ -149,7 +139,7 @@ void ListaDepartamento::registra_departamento() {
 		cerr << "nao consegui regartar arquivo departamento" << endl;
 		fflush(stdin);
 	}
-	destroy_lista();
+	listadepartamento.destroy();
 	while (!ResgistraDepartamento.eof()) {
 		Departamento* temp = NULL;
 		int id;
