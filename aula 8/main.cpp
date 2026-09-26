@@ -9,6 +9,7 @@ int main() {
 	const char* caixa_alta;
 	caixa_alta = s.get_string();
 	StringA v,t;
+	const StringA a;
 	v = "pasardaga e o lugar dos sonhos do passado";
 	cout << v.get_string() << endl;
 	if (v != s)
@@ -17,6 +18,7 @@ int main() {
 		cout << "e para acontece" << endl;
 	cout << v << endl;
 	s += v;
+	a[0];
 	//t = s +  " "+ v;
 	cin >> t;
 	cout << t << endl;

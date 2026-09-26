@@ -59,6 +59,12 @@ void StringA::set_string(const char* s) {
  bool StringA::operator!=(StringA& s) {
 	return !verifica(s);
 }
+ char& StringA::operator[](int indice) {
+	 return palavra[indice];
+ }
+ const char& StringA::operator[](int indice) const{
+	 return palavra[indice];
+ }
 ostream& operator<<(ostream& out, StringA & s) {
 	out << s.get_string();
 	return out;

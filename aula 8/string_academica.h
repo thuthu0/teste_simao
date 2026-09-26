@@ -20,6 +20,8 @@ class StringA {
 		   StringA operator+=(const StringA& s);
 		 bool operator==(StringA& s);
 		 bool operator!=(StringA& s);
+		 char& operator[](int indice);
+		 const char& operator[](int indice) const;
 };
 ostream&operator<<(ostream& out, StringA & s);
 istream&operator>>(istream& in, StringA& s);
